@@ -30,7 +30,8 @@ import org.springframework.context.annotation.Configuration
 import java.lang.invoke.MethodHandles
 
 @Configuration
-open class ApplicationConfig {
+class ApplicationConfig {
+
     @Bean
     @Qualifier("messageSerializer")
     open fun messageSerializer(): Serializer {
@@ -45,14 +46,14 @@ open class ApplicationConfig {
     }
 
     @Bean
-    open fun routingStrategy(): RoutingStrategy {
+    fun routingStrategy(): RoutingStrategy {
         return AnnotationRoutingStrategy.builder()
             .fallbackRoutingStrategy(UnresolvedRoutingKeyPolicy.RANDOM_KEY)
             .build()
     }
 
     @Bean
-    open fun loggingInterceptor(): LoggingInterceptor<Message<*>> {
+    fun loggingInterceptor(): LoggingInterceptor<Message<*>> {
         return LoggingInterceptor()
     }
 
@@ -64,39 +65,39 @@ open class ApplicationConfig {
 //        commandBus.registerDispatchInterceptor(loggingInterceptor)
 //        commandBus.registerHandlerInterceptor(loggingInterceptor)
 //    }
-//
+
 //    @Autowired
 //    fun configureLoggingInterceptorFor(eventBus: EventBus, loggingInterceptor: LoggingInterceptor<Message<*>?>?) {
 //        eventBus.registerDispatchInterceptor(loggingInterceptor)
 //    }
-//
+
 //    @Autowired
 //    fun configureLoggingInterceptorFor(eventProcessingConfigurer: EventProcessingConfigurer, loggingInterceptor: LoggingInterceptor<Message<*>?>?) {
 //        eventProcessingConfigurer.registerDefaultHandlerInterceptor { config: org.axonframework.config.Configuration?, processorName: String? -> loggingInterceptor }
 //    }
-//
+
 //    @Autowired
 //    fun configureLoggingInterceptorFor(queryBus: QueryBus, loggingInterceptor: LoggingInterceptor<Message<*>?>) {
 //        queryBus.registerDispatchInterceptor(loggingInterceptor)
 //        queryBus.registerHandlerInterceptor(loggingInterceptor)
 //    }
-//
-//    @Autowired
-//    fun configureResultHandlerInterceptors(
-//        commandGateway: ReactorCommandGateway,
-//        queryGateway: ReactorQueryGateway
-//    ) {
-//        commandGateway.registerResultHandlerInterceptor { cmd: CommandMessage<*>?, result: Flux<CommandResultMessage<*>?> ->
-//            result.onErrorMap { exception: Throwable ->
-//                ExceptionMapper.mapRemoteException(exception)
-//            }
-//        }
-//        queryGateway.registerResultHandlerInterceptor { query: QueryMessage<*, *>?, result: Flux<ResultMessage<*>?> ->
-//            result.onErrorMap { exception: Throwable ->
-//                ExceptionMapper.mapRemoteException(exception)
-//            }
-//        }
-//    }
+
+    @Autowired
+    fun configureResultHandlerInterceptors(
+        commandGateway: ReactorCommandGateway,
+        queryGateway: ReactorQueryGateway
+    ) {
+        commandGateway.registerResultHandlerInterceptor { cmd: CommandMessage<*>?, result: Flux<CommandResultMessage<*>?> ->
+            result.onErrorMap { exception: Throwable ->
+                ExceptionMapper.mapRemoteException(exception)
+            }
+        }
+        queryGateway.registerResultHandlerInterceptor { query: QueryMessage<*, *>?, result: Flux<ResultMessage<*>?> ->
+            result.onErrorMap { exception: Throwable ->
+                ExceptionMapper.mapRemoteException(exception)
+            }
+        }
+    }
 
     /**
      * This [Hooks.onErrorDropped] is included as a recommendation from RSocket Java's GitHub issue

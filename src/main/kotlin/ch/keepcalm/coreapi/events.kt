@@ -12,4 +12,4 @@ data class GameRentedEvent(val gameIdentifier: String,
                            val renter: String)
 
 data class GameReturnedEvent(val gameIdentifier: String,
-                             val renter: String)
+                             val returner: String)

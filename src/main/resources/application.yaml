@@ -2,3 +2,8 @@ spring:
   mongodb:
     embedded:
       version: 3.2.3
+
+
+  config:
+    import:
+      - classpath:mongodb.yaml

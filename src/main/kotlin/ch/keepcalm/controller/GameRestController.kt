@@ -24,7 +24,7 @@ class GameRestController(val commandGateway: CommandGateway) {
     @PostMapping(value = ["/register"])
     @ResponseStatus(HttpStatus.CREATED)
     suspend fun registerGame(@RequestBody request: Game): EntityModel<Unit> {
-        log.info("-----------> {}", request.title)
+        log.info("-----------> {}", request)
 
         commandGateway.send<Any>(
             RegisterGameCommand(

@@ -1,4 +1,4 @@
-package ch.keepcalm.coreapi
+package ch.keepcalm
 
 import org.axonframework.commandhandling.CommandExecutionException
 

@@ -31,6 +31,7 @@ class GameRestController(val commandGateway: CommandGateway) {
                 gameIdentifier = request.gameIdentifier,
                 title = request.title,
                 releaseDate = request.releaseDate,
+                description = request.description,
                 singleplayer = request.singleplayer,
                 multiplayer = request.multiplayer
             )

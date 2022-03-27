@@ -35,6 +35,7 @@ class Game {
                 GameRegisteredEvent(
                     gameIdentifier = command.gameIdentifier,
                     title = command.title,
+                    description= command.description,
                     releaseDate = command.releaseDate,
                     singleplayer = command.singleplayer,
                     multiplayer = command.multiplayer
@@ -63,6 +64,8 @@ class Game {
         AggregateLifecycle.apply(GameReturnedEvent(gameIdentifier = gameIdentifier, returner = command.returner))
     }
 
+
+    
     @EventSourcingHandler
     fun on(event: GameRegisteredEvent) {
         log.info("EventSourcing GameRegisteredEvent ----------->  {}", event)

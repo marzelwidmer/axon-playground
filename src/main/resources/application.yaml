@@ -7,3 +7,23 @@ spring:
   config:
     import:
       - classpath:mongodb.yaml
+
+  jackson:
+    time-zone: CET
+    default-property-inclusion: non_null
+    serialization:
+      write_dates_as_timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+#axon:
+#  eventhandling:
+#    processors:
+#      catalog:
+#        mode: pooled
+#        thread-coung: 4
+#
+#  serializer:
+#    events: jackson
+#    messages: jackson
+#    general: jackson

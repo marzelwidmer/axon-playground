@@ -1,8 +1,6 @@
 package ch.keepcalm
 
 import ch.keepcalm.coreapi.ExceptionStatusCode
-import ch.keepcalm.coreapi.RentalCommandException
-import ch.keepcalm.coreapi.RentalQueryException
 import org.axonframework.commandhandling.CommandExecutionException
 import org.axonframework.queryhandling.QueryExecutionException
 

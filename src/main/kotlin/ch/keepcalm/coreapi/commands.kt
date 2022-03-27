@@ -6,9 +6,11 @@ import java.time.Instant
 data class RegisterGameCommand(@TargetAggregateIdentifier
                                val gameIdentifier: String,
                                val title: String,
+                               val description: String,
                                val releaseDate: Instant,
                                val singleplayer: Boolean,
                                val multiplayer: Boolean)
+
 
 data class RentGameCommand(@TargetAggregateIdentifier
                            val gameIdentifier: String,
